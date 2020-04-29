@@ -1,0 +1,46 @@
+
+server:
+  port: 8053   #  端口号
+
+
+swagger:
+  title: 顾问管理中心
+  description: 顾问管理接口文档说明
+  version: 1.0
+  
+service:
+  client:
+    serviceId: consultant
+    secret: ENC(U+bhXLVzTSvT+HBV5bHCfd9wJj5SSuVv)
+    authHeader: service-token
+    authHost: http://authcenter/oauth/service
+    tokenHead: api-token
+  api:
+    tokenHead: api-token
+
+spring:
+  datasource:
+    url: jdbc:mysql://db-auth-server:3306/ics-consultant?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useOldAliasMetadataBehavior=true&useSSL=false
+
+info:   #拥有者
+  owner: KingXu #监控版本号
+  version: 1.0.0
+application:
+  apiAuth:
+    excludePath: "/flagperson/disableFlagPersion"
+
+
+ribbon:
+  ReadTimeout: 120000
+  ConnectTimeout: 120000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds:  120000
+
+ftp:
+  downloadUrl: http://192.168.254.80:8044/file/consultant/template/consultantTemplate.xlsx
